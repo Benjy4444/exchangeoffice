@@ -1,29 +1,24 @@
 package principal;
 
-import calculos.CalculoConversion;
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import modelos.Conversion;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         Scanner lectura = new Scanner(System.in);
 
         List<Conversion> historialDeConversiones = new ArrayList<>();
 
         int opcionDeMenu = 0;
+
+        Conversion miConversion = new Conversion();
 
         while (opcionDeMenu != 7) {
 
@@ -49,48 +44,129 @@ public class Principal {
 
             //++++++++++++++++
 
-            //Llamado a Gson
-            Gson gson = new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).
-                    setPrettyPrinting()
-                    .create();
-
             String monedaBase = "";
             String monedaObjetivo = "";
+            Double cantidadParaCambiar;
+            Double resultado;
 
             switch (opcionDeMenu) {
                 case 1:
-                    monedaBase = "USD";
-                    monedaObjetivo = "ARS";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("USD");
+                    miConversion.setMonedaObjetivo("ARS");
+                    System.out.println("--->>>> USD ---->>>> ARS ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (USD): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.Resultado(miConversion) + " ARS");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 2:
-                    monedaBase = "ARS";
-                    monedaObjetivo = "USD";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("ARS");
+                    miConversion.setMonedaObjetivo("USD");
+                    System.out.println("--->>>> ARS ---->>>> USD ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (ARS): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.getCantidadParaCambiar()*miConversion.Resultado(miConversion) + " USD");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 3:
-                    monedaBase = "USD";
-                    monedaObjetivo = "BRL";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("USD");
+                    miConversion.setMonedaObjetivo("BRL");
+                    System.out.println("--->>>> USD ---->>>> BRL ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (USD): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.getCantidadParaCambiar()*miConversion.Resultado(miConversion) + " BRL");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 4:
-                    monedaBase = "BRL";
-                    monedaObjetivo = "USD";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("BRL");
+                    miConversion.setMonedaObjetivo("USD");
+                    System.out.println("--->>>> BRL ---->>>> USD ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (BRL): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.getCantidadParaCambiar()*miConversion.Resultado(miConversion) + " USD");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 5:
-                    monedaBase = "USD";
-                    monedaObjetivo = "COP";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("USD");
+                    miConversion.setMonedaObjetivo("COP");
+                    System.out.println("--->>>> USD ---->>>> COP ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (USD): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.getCantidadParaCambiar()*miConversion.Resultado(miConversion) + " COP");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 6:
-                    monedaBase = "COP";
-                    monedaObjetivo = "USD";
-                    CalculoConversion.Resultado(monedaBase, monedaObjetivo);
+                    miConversion.setMonedaOrigen("COP");
+                    miConversion.setMonedaObjetivo("USD");
+                    System.out.println("--->>>> COP ---->>>> USD ---->>>>");
+                    System.out.println("Ingrese el monto para intercambiar (COP): ");
+                    cantidadParaCambiar = (double) Integer.parseInt(lectura.nextLine());
+                    miConversion.setCantidadParaCambiar(cantidadParaCambiar);
+                    try {
+                        miConversion.Resultado(miConversion);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("El monto resultante es: " + miConversion.getCantidadParaCambiar()*miConversion.Resultado(miConversion) + " USD");
+                    System.out.println("--->>>> ... ---->>>> ... ---->>>>");
+                    System.out.println("Presione una tecla para continuar...");
+                    System.in.read();
                     break;
                 case 7:
-                    System.out.println("¡Gracias por usar nuestra aplicación!");
+                    System.out.println("¡Gracias por usar la aplicación!");
                     break;
                 default:
                     // Default secuencia de sentencias.
