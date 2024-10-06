@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Date;
+import java.sql.Date;
 
 public class Conversion {
     @SerializedName("base_code")
@@ -76,12 +76,12 @@ public class Conversion {
 
     @Override
     public String toString() {
-        return "Moneda de base= " + monedaOrigen +
-                ", Moneda objetivo =" + monedaObjetivo +
-                ", Monto para intercambio=" + cantidadParaCambiar +
-                ", Tasa de conversión=" + tasaDeConversion +
-                ", Cantidad convertida=" + cantidadConvertida +
-                ", Fecha y hora=" + fechaYHoraConversion;
+        return "Moneda de base= " + this.monedaOrigen +
+                ", Moneda objetivo =" + this.monedaObjetivo+
+                ", Monto para intercambio=" + this.getCantidadParaCambiar() +
+                ", Tasa de conversión=" + this.tasaDeConversion +
+                ", Cantidad convertida=" + this.getCantidadConvertida() +
+                ", Fecha y hora=" + this.fechaYHoraConversion;
     }
 
     public Double Resultado(Conversion conversion) throws IOException, InterruptedException {
@@ -110,7 +110,7 @@ public class Conversion {
 
             //System.out.println(json);
 
-            Conversion miOtraConversion = gson.fromJson(json, Conversion.class);
+            Conversion miConversion = gson.fromJson(json, Conversion.class);
 
             //System.out.println(this.cantidadParaCambiar);
             //System.out.println(miOtraConversion.tasaDeConversion);
@@ -126,7 +126,7 @@ public class Conversion {
         //}
 
 
-        return miOtraConversion.tasaDeConversion;
+        return miConversion.tasaDeConversion;
     }
 
 
