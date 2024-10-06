@@ -1,31 +1,16 @@
 package principal;
-
 import modelos.Conversion;
-import procesos.CalculoDeConversion;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) throws IOException, InterruptedException {
-
         Scanner lectura = new Scanner(System.in);
-
         List<Conversion> historialDeConversiones = new ArrayList<>();
-
         int opcionDeMenu = 0;
-
-        //Conversion miConversion = new Conversion();
-        //CalculoDeConversion miCalculoDeConversion = new CalculoDeConversion();
-
         while (opcionDeMenu != 8) {
-
             //Menú de opciones
             System.out.println("*********************************************");
             System.out.println("Sea bienvenido/a al Conversor de Monedas =)");
@@ -38,22 +23,17 @@ public class Principal {
             System.out.println("7 --- Historial de conversiones de la sesión");
             System.out.println("8 --- SALIR");
             System.out.println("*********************************************");
-
             //++++++++++++++++
-
             //Solicita ingreso opción de menú
             System.out.println("---------------------------------------------");
             System.out.println("Ingrese una opción: ");
             opcionDeMenu = Integer.parseInt(lectura.nextLine());
             System.out.println("---------------------------------------------");
-
             //++++++++++++++++
-
             String monedaBase = "";
             String monedaObjetivo = "";
             Double cantidadParaCambiar;
             Double resultado;
-
             switch (opcionDeMenu) {
                 case 1:
                     Conversion miConversionUsdArs = new Conversion();
