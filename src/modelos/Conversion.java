@@ -15,15 +15,11 @@ import java.sql.Date;
 public class Conversion {
     @SerializedName("base_code")
     private String monedaOrigen;
-
     @SerializedName("target_code")
     private String monedaObjetivo;
-
     private double cantidadParaCambiar;
-
     @SerializedName("conversion_rate")
     private double tasaDeConversion;
-
     private double cantidadConvertida;
     private Date fechaYHoraConversion;
 
@@ -66,6 +62,10 @@ public class Conversion {
         return cantidadConvertida;
     }
 
+    public void setCantidadConvertida(double cantidadConvertida) {
+        this.cantidadConvertida = cantidadConvertida;
+    }
+
     public Date getFechaYHoraConversion() {
         return fechaYHoraConversion;
     }
@@ -85,49 +85,26 @@ public class Conversion {
     }
 
     public Double Resultado(Conversion conversion) throws IOException, InterruptedException {
-
         //Llamado a Gson
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).
                 setPrettyPrinting()
                 .create();
-
+        //Creación de la cadena para conectarse al sitio de ExchangeRate
         String apiKeyExchangeRate = "a8b71d5baa160129e2ba346b";
         String direccionExchangeRate = "https://v6.exchangerate-api.com/v6/" + apiKeyExchangeRate + "/pair/" + this.monedaOrigen + "/" + this.monedaObjetivo;
-
-
         HttpClient client = HttpClient.newHttpClient();
-
-        //try {
+        try {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(direccionExchangeRate))
                     .build();
-
             HttpResponse<String> response = client
                     .send(request, HttpResponse.BodyHandlers.ofString());
-
             String json = response.body();
-
-            //System.out.println(json);
-
-            Conversion miConversion = gson.fromJson(json, Conversion.class);
-
-            //System.out.println(this.cantidadParaCambiar);
-            //System.out.println(miOtraConversion.tasaDeConversion);
-
-            //System.out.println(miOtraConversion);
-
-            //this.cantidadConvertida = cantidadParaCambiar * tasaDeConversion;
-
-        //} catch (IOException e) {
-        //    throw new RuntimeException(e);
-        //} catch (InterruptedException e) {
-        //    throw new RuntimeException(e);
-        //}
-
-
-        return miConversion.tasaDeConversion;
+            Conversion miConversionGson = gson.fromJson(json, Conversion.class);
+            return miConversionGson.getTasaDeConversion();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 }
