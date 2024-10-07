@@ -4,9 +4,9 @@ import modelos.Conversion;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.time.LocalDateTime;
 
 public class Principal {
 
@@ -86,9 +86,9 @@ public class Principal {
             double tasaDeConversion = conversion.obtenerTasaDeConversion();
             conversion.setTasaDeConversion(tasaDeConversion);
             conversion.setCantidadConvertida(cantidadParaCambiar * tasaDeConversion);
-
-            //conversion.setFechaYHoraConversion(LocalDateTime.now());  // Agregar fecha y hora de la conversión
-
+            //Agrega fecha y hora de la conversión
+            Date date = new Date();
+            conversion.setFechaYHoraConversion(date);
             System.out.println("El monto resultante es: " + conversion.getCantidadConvertida() + " " + monedaObjetivo);
             System.out.println("Resumen de la operación -------------- " + conversion);
         } catch (IOException | InterruptedException e) {

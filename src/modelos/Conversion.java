@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 public class Conversion {
@@ -23,16 +23,15 @@ public class Conversion {
     @SerializedName("conversion_rate")
     private double tasaDeConversion;
     private double cantidadConvertida;
-    //private LocalDateTime fechaYHoraConversion;
+    private Date fechaYHoraConversion;
 
     // Constantes para la API
     private static final String API_KEY = "a8b71d5baa160129e2ba346b";
     private static final String URL_BASE = "https://v6.exchangerate-api.com/v6/";
 
     // Constructor
-    //public Conversion() {
-    //    this.fechaYHoraConversion = LocalDateTime.now();  // Fecha y hora actuales
-    //}
+    public Conversion() {
+    }
 
     // Getters y Setters
     public String getMonedaOrigen() {
@@ -81,13 +80,13 @@ public class Conversion {
         this.cantidadConvertida = cantidadConvertida;
     }
 
-    //public LocalDateTime getFechaYHoraConversion() {
-    //    return fechaYHoraConversion;
-    //}
+    public Date getFechaYHoraConversion() {
+        return fechaYHoraConversion;
+    }
 
-    //public void setFechaYHoraConversion(LocalDateTime fechaYHoraConversion) {
-    //    this.fechaYHoraConversion = fechaYHoraConversion;
-    //}
+    public void setFechaYHoraConversion(Date fechaYHoraConversion) {
+        this.fechaYHoraConversion = fechaYHoraConversion;
+    }
 
     @Override
     public String toString() {
@@ -95,8 +94,8 @@ public class Conversion {
                 ", Moneda objetivo= " + monedaObjetivo +
                 ", Monto para intercambio= " + cantidadParaCambiar +
                 ", Tasa de conversión= " + tasaDeConversion +
-                ", Cantidad convertida= " + cantidadConvertida;
-                //", Fecha y hora= " + fechaYHoraConversion;
+                ", Cantidad convertida= " + cantidadConvertida +
+                ", Fecha y hora= " + fechaYHoraConversion;
     }
 
     // Método para obtener la tasa de conversión
